@@ -140,7 +140,6 @@ export class CountriesService {
 
   /**
    * Get data with countries filtered by name and favorite
-   * @param data Is a data to filter
    * @param filterText Is a search text to find
    * @param continent Is a continent selected to filter
    * @returns All continents with countries filtered
@@ -181,7 +180,9 @@ export class CountriesService {
 
   /**
    * get countries list using format CountryDTO[]
-   * @param countries
+   * @param items data to be filtered
+   * @param filterText search text to filter by name
+   * @param isFavorite filter by favorites
    * @returns array list using format CountryDTO[]
    */
   filterCountriesByName(items: any, filterText: string, isFavorite: boolean) {
@@ -220,9 +221,10 @@ export class CountriesService {
   }
 
   /**
-   * get countries list using format CountryDTO[]
-   * @param countries
-   * @returns array list using format CountryDTO[]
+   * Find country and update the favorite property value
+   * in global data
+   * @param item country to be searched
+   * @param params contains the parameters to filter {filterText, continent}
    */
   async changeCountryPropertyFavorite(item: any, params: any) {
     let continentIdex = this.dataContinents.findIndex(
