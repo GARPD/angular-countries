@@ -1,0 +1,87 @@
+<section class="countries-page">
+  <header class="header">
+    <div class="header-text-box">
+      <h1 class="header-title">
+        <span>Find any <span class="color-info">country</span></span> in the
+        world.
+      </h1>
+      <div class="header-filters">
+        <div
+          class="header-filters-box"
+          *ngIf="optionsFilterList && optionsFilterList.length > 0"
+        >
+          <input
+            #searchInput
+            [(ngModel)]="filterText"
+            (keyup)="searchCountry(searchInput.value)"
+            class="filter-input"
+            type="text"
+            placeholder="Search country"
+          />
+          <div class="filter-select-box">
+            <app-dropdown
+              [dataList]="optionsFilterList"
+              (onChange)="onChangeFilterList($event)"
+            ></app-dropdown>
+          </div>
+          <span class="filter-icon">
+            <img src="assets/images/filter-icon.svg" alt="filter icon" />
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="header-img-box">
+      <div class="header-img"></div>
+    </div>
+  </header>
+  <main class="main">
+    <div class="container" *ngIf="continents$ | async as continents">
+      <ng-container *ngFor="let continent of continents">
+        <div
+          class="sub-container"
+          *ngIf="
+            continent &&
+            continent?.countries &&
+            (continent?.countries)!.length > 0
+          "
+        >
+          <h4 class="sub-container-title">{{ continent?.name }}</h4>
+          <ul class="list">
+            <li
+              class="list-item"
+              *ngFor="let country of continent.countries; trackBy: trackByItems"
+              (click)="openModal(country)"
+            >
+              <img
+                class="list-img"
+                [src]="country?.flag"
+                alt="{{ country?.name }} flag"
+              />
+              <span class="list-text">{{ country?.name }}</span>
+              <span *ngIf="country?.favorite" class="">
+                <svg
+                  class="star-icon-active"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 29 27"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M14.5 1.2281L18.0491 9.19012L18.1665 9.45352L18.4533 9.48379L27.1223 10.3988L20.6467 16.2345L20.4325 16.4276L20.4923 16.7097L22.301 25.2372L14.7498 20.8819L14.5 20.7378L14.2502 20.8819L6.69897 25.2372L8.50767 16.7097L8.5675 16.4276L8.35328 16.2345L1.87767 10.3988L10.5467 9.48379L10.8335 9.45352L10.9509 9.19012L14.5 1.2281Z"
+                    stroke="#BDBDBD"
+                  />
+                </svg>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </ng-container>
+    </div>
+    <div class="not-found-box" *ngIf="emptyDataFound">
+      <div>Not results found</div>
+    </div>
+  </main>
+</section>
+
+<modal-country #modalCountry (close)="onCloseModal($event)"></modal-country>

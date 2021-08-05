@@ -1,0 +1,8 @@
+<button type="button" class="btn-dropdown" (click)="onClickBtnDropdown()">
+  {{ currentSelectedItem?.name }}
+</button>
+<ul #listDropdown class="list-dropdown" [class.show]="show">
+  <li *ngFor="let item of dataList" (click)="onClickItem(item)">
+    {{ item?.name }}
+  </li>
+</ul>

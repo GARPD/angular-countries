@@ -1,0 +1,46 @@
+/* You can add global styles to this file, and also import other style files */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 14px;
+  color: #333;
+}
+
+input,
+button {
+  height: 100%;
+  font-size: 19px;
+  line-height: 22px;
+  color: #4f4f4f;
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.color-primary {
+  color: #09295e;
+}
+
+.color-info {
+  color: #21adcf;
+}
+
+.show {
+  display: block !important;
+  transition: all 0.5s ease-in;
+}
+
+.hidden {
+  display: none !important;
+  transition: all 0.5s ease-in;
+}
